@@ -8,6 +8,7 @@
     "no-process-exit": "off",
     "object-shorthand": "off",
     "class-methods-use-this": "off",
-    "radix": "off"
+    "radix": "off",
+    "no-param-reassign": "off"
   }
 }
