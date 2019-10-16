@@ -8,23 +8,21 @@ const bodyParser = require('body-parser');
 
 const checkJwt = require('../middleware/jwt');
 
-const movieService = require('../services/movie');
+const movieController = require('../controller/movieController');
 
 movieRouter.use(bodyParser.json());
 
-movieRouter.use(movieService.invalidToken);
-movieRouter.route('/').get(movieService.redirectHome);
-movieRouter.route('/home').get(movieService.getAllMovies);
-movieRouter.route('/movie/genres/:genre').get(movieService.getMoviesbyGenre);
-movieRouter.route('/movie/:id').get(movieService.getMovie);
-movieRouter.route('/movie/:id/countries').get(movieService.getCountriesofMovie);
-movieRouter.route('/movie/:id/writers').get(movieService.getWritersofMovie);
-movieRouter.route('/writers').get(movieService.getMoviesbyWriter);
-movieRouter.route('/search').get(movieService.getSearchedMovies);
-movieRouter.route('/delete/:id').get(checkJwt, movieService.deleteMovie);
-movieRouter
-  .route('/update/:id')
-  .get(checkJwt, movieService.getUpdateMovie)
-  .put(checkJwt, movieService.putUpdateMovie);
+movieRouter.use(movieController.invalidToken);
+movieRouter.use(movieController.redirectHome);
+movieRouter.use(movieController.getAllMovies);
+movieRouter.use(movieController.getMoviesbyGenre);
+movieRouter.use(movieController.getMovie);
+movieRouter.use(movieController.getCountriesofMovie);
+movieRouter.use(movieController.getWritersofMovie);
+movieRouter.use(movieController.getMoviesbyWriter);
+movieRouter.use(movieController.getSearchedMovies);
+movieRouter.use(checkJwt, movieController.deleteMovie);
+movieRouter.use(checkJwt, movieController.getUpdateMovie);
+movieRouter.use(checkJwt, movieController.putUpdateMovie);
 
 module.exports = movieRouter;
